@@ -27,11 +27,8 @@ def clear():
 
 
 clear()
-#drivePath = input("Enter the drive path ({PLC IP}/bp/{Ethernet Adapter Slot}/enet/{Drive IP})")
-#Below is path set for Motion Trainer to bypass setting path at beginning. Comment out to set path manually.
-drivePath = "10.64.138.13/bp/2/enet/192.168.1.30"
 print("PF525 Parameter Read. CTRL-C to quit.")
-
+drivePath = input("Enter the drive path ({PLC IP}/bp/{Ethernet Adapter Slot}/enet/{Drive IP})")
 
 while True:
     readParam = input("Enter the parameter number to be read:")
