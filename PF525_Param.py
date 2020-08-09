@@ -8,7 +8,7 @@ def read_525_param():
         parm = drive.generic_message(
             service=CommonService.get_attribute_single,  #b'\x0E'
             class_code=b'\x93',
-            instance=instanceString,
+            instance=intParam,
             attribute=b'\x09',
             connected=False,
             unconnected_send=True,
@@ -27,17 +27,21 @@ def clear():
 
 
 clear()
-print("PF525 Parameter Read. CTRL-C to quit.")
-drivePath = input("Enter the drive path ({PLC IP}/bp/{Ethernet Adapter Slot}/enet/{Drive IP})")
-
-while True:
-    readParam = input("Enter the parameter number to be read:")
-    paramList = ParamDict.ParamDict[readParam]
-    instanceString = paramList[1]
-    dataFormatString = paramList[0]
-    returnedParam = read_525_param()
-    returnedDict = returnedParam[1]
-    returnedDesc = str(list(returnedParam[1]))
-    for key, value in returnedDict.items():
-        print(key)
-        print(value)
+print("PF525 Parameter Read. Q to quit.")
+#drivePath = input("Enter the drive path ({PLC IP}/bp/{Ethernet Adapter Slot}/enet/{Drive IP})")
+drivePath = "10.64.138.13/bp/2/enet/192.168.1.30"
+while True:    
+    readParam = input("Enter the parameter number to be read: ")
+    if readParam == "q" or readParam == "Q":
+        break
+    else:
+        intParam = int(readParam)
+        paramList = ParamDict.ParamDict[readParam]
+        instanceString = paramList[1]
+        dataFormatString = paramList[0]
+        returnedParam = read_525_param()
+        returnedDict = returnedParam[1]
+        returnedDesc = str(list(returnedParam[1]))
+        for key, value in returnedDict.items():
+            print(key)
+            print(value)
